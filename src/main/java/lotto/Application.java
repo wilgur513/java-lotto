@@ -24,7 +24,7 @@ import lotto.model.exception.InvalidLottoSizeException;
 import lotto.model.exception.InvalidNumberRangeException;
 import lotto.model.exception.InvalidRankException;
 import lotto.model.exception.LottoException;
-import lotto.view.LottoParser;
+import lotto.view.LottoConvertor;
 import lotto.view.OutputView;
 
 public class Application {
@@ -36,18 +36,14 @@ public class Application {
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
     public static void main(String[] args) {
-        Money money = initMoney();
+        Money money = inputMoney();
         LottoMachine lottoMachine = createLottoMachine();
         Lottoes lottoes = issueLottoes(lottoMachine, money);
-        WinnerLotto winnerLotto = initWinnerLotto();
+        WinnerLotto winnerLotto = inputWinnerLotto();
         summarize(winnerLotto, lottoes);
     }
 
-    private static LottoMachine createLottoMachine() {
-        return new LottoMachine(LottoGenerator.randomLottoGenerator());
-    }
-
-    private static Money initMoney() {
+    private static Money inputMoney() {
         return createTemplate(Application::createMoney);
     }
 
@@ -55,15 +51,6 @@ public class Application {
         String moneyText = inputMoneyText(Application::handleException);
         int amount = Integer.parseInt(moneyText.trim());
         return new Money(amount);
-    }
-
-    private static <T> T createTemplate(Supplier<T> supplier) {
-        try {
-            return supplier.get();
-        } catch (LottoException e) {
-            handleException(e);
-            return supplier.get();
-        }
     }
 
     private static void handleException(Exception e) {
@@ -77,6 +64,19 @@ public class Application {
         return e.getMessage();
     }
 
+    private static <T> T createTemplate(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (LottoException e) {
+            handleException(e);
+            return supplier.get();
+        }
+    }
+
+    private static LottoMachine createLottoMachine() {
+        return new LottoMachine(LottoGenerator.randomLottoGenerator());
+    }
+
     private static Lottoes issueLottoes(LottoMachine lottoMachine, Money money) {
         Lottoes lottoes = lottoMachine.issueLotto(money);
         OutputView.printLottoSize(lottoes.size());
@@ -86,14 +86,14 @@ public class Application {
         return lottoes;
     }
 
-    private static WinnerLotto initWinnerLotto() {
+    private static WinnerLotto inputWinnerLotto() {
         return createTemplate(() -> new WinnerLotto(createLotto(), createBonusNumber()));
     }
 
     private static Lotto createLotto() {
-        LottoParser lottoParser = new LottoParser();
+        LottoConvertor lottoConvertor = new LottoConvertor();
         String lottoText = inputLottoText(Application::handleException);
-        return lottoParser.convert(lottoText);
+        return lottoConvertor.convert(lottoText);
     }
 
     private static LottoNumber createBonusNumber() {
