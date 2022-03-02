@@ -36,15 +36,16 @@ public class Application {
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
     public static void main(String[] args) {
-        Money money = inputMoney();
         LottoMachine lottoMachine = createLottoMachine();
-        Lottoes lottoes = issueLottoes(lottoMachine, money);
+        inputMoney(lottoMachine);
+        Lottoes lottoes = issueLottoes(lottoMachine);
         WinnerLotto winnerLotto = inputWinnerLotto();
         summarize(winnerLotto, lottoes);
     }
 
-    private static Money inputMoney() {
-        return createTemplate(Application::createMoney);
+    private static void inputMoney(LottoMachine lottoMachine) {
+        Money money = createTemplate(Application::createMoney);
+        lottoMachine.inputMoney(money);
     }
 
     private static Money createMoney() {
@@ -77,8 +78,8 @@ public class Application {
         return new LottoMachine(LottoGenerator.randomLottoGenerator());
     }
 
-    private static Lottoes issueLottoes(LottoMachine lottoMachine, Money money) {
-        Lottoes lottoes = lottoMachine.issueLotto(money);
+    private static Lottoes issueLottoes(LottoMachine lottoMachine) {
+        Lottoes lottoes = lottoMachine.issueLotto();
         OutputView.printLottoSize(lottoes.size());
         for (Lotto lotto : lottoes) {
             OutputView.printLotto(lotto.getIntValues());
