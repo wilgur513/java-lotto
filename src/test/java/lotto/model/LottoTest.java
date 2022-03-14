@@ -39,7 +39,7 @@ public class LottoTest {
     void getMatchedNumberCountTest() {
         Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
         Lotto otherLotto = Lotto.create(List.of(1, 10, 20, 30, 40, 6));
-        int count = lotto.getMatchedCount(otherLotto);
+        int count = lotto.matchedCount(otherLotto);
         assertThat(count).isEqualTo(2);
     }
 
@@ -62,7 +62,7 @@ public class LottoTest {
     @DisplayName("로또 int형 숫자 리스트 반환")
     void getIntValues() {
         Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getIntValues()).hasSize(6);
-        assertThat(lotto.getIntValues()).contains(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.intValues()).hasSize(6);
+        assertThat(lotto.intValues()).contains(1, 2, 3, 4, 5, 6);
     }
 }

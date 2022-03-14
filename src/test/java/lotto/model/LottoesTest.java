@@ -33,7 +33,7 @@ public class LottoesTest {
     @Test
     void getPrice() {
         Lottoes lotto = new Lottoes(List.of(lottoes[0], lottoes[1], lottoes[2]));
-        assertThat(lotto.getPrice()).isEqualTo(Lotto.PRICE.multiply(3));
+        assertThat(lotto.price()).isEqualTo(Lotto.PRICE.multiply(3));
     }
 
 }

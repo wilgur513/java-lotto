@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.Collection;
 import lotto.model.exception.DuplicatedNumberException;
@@ -21,7 +21,7 @@ public class WinnerLotto {
     public Collection<Rank> classify(Lottoes lottoes) {
         return lottoes.stream()
             .map(this::rankBy)
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 
     private Rank rankBy(Lotto lotto) {
@@ -29,7 +29,7 @@ public class WinnerLotto {
     }
 
     private int matchedCount(Lotto lottoNumbers) {
-        return this.winnerLotto.getMatchedCount(lottoNumbers);
+        return this.winnerLotto.matchedCount(lottoNumbers);
     }
 
     private boolean isBonusMatched(Lotto lottoNumbers) {

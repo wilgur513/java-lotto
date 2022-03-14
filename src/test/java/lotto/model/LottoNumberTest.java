@@ -31,6 +31,6 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 int형 값으로 반환")
     void getIntValue() {
         LottoNumber lottoNumber = new LottoNumber(10);
-        assertThat(lottoNumber.getIntValue()).isEqualTo(10);
+        assertThat(lottoNumber.intValue()).isEqualTo(10);
     }
 }

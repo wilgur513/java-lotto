@@ -71,11 +71,11 @@ public class Controller {
     }
 
     private static Lottoes issueLottoes(LottoMachine lottoMachine) {
-        OutputView.printLottoSize(lottoMachine.getManualLottoesSize(),
-            lottoMachine.getAutoLottoesSize());
+        OutputView.printLottoSize(lottoMachine.manualLottoesSize(),
+            lottoMachine.autoLottoesSize());
         Lottoes lottoes = lottoMachine.issueLotto();
         for (Lotto lotto : lottoes) {
-            OutputView.printLotto(lotto.getIntValues());
+            OutputView.printLotto(lotto.intValues());
         }
         return lottoes;
     }
@@ -98,9 +98,9 @@ public class Controller {
     private static void summarize(Lottoes issuedLottoes, WinnerLotto winnerLotto) {
         Collection<Rank> ranks = winnerLotto.classify(issuedLottoes);
         Statistic statistic = new Statistic(ranks);
-        OutputView.printStatistic(statistic.getCountByRank(FIRST), statistic.getCountByRank(SECOND),
-            statistic.getCountByRank(THIRD), statistic.getCountByRank(FOURTH),
-            statistic.getCountByRank(FIFTH), statistic.getProfitRate().getDoubleValue());
+        OutputView.printStatistic(statistic.countBy(FIRST), statistic.countBy(SECOND),
+            statistic.countBy(THIRD), statistic.countBy(FOURTH),
+            statistic.countBy(FIFTH), statistic.profitRate().doubleValue());
     }
 
 }

@@ -35,15 +35,15 @@ public class Lotto {
             .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
-    public int getMatchedCount(Lotto otherLotto) {
+    public int matchedCount(Lotto otherLotto) {
         return (int) this.numbers.stream()
-            .filter(number -> otherLotto.contains(number))
+            .filter(otherLotto::contains)
             .count();
     }
 
-    public List<Integer> getIntValues() {
+    public List<Integer> intValues() {
         return numbers.stream()
-            .map(LottoNumber::getIntValue)
+            .map(LottoNumber::intValue)
             .collect(toList());
     }
 
@@ -68,20 +68,17 @@ public class Lotto {
         if (hasDuplicatedNumber(numbers)) {
             throw new DuplicatedNumberException();
         }
-        return new Lotto(toSet(numbers));
+        return new Lotto(Set.copyOf(numbers));
     }
 
     private static boolean hasDuplicatedNumber(List<Integer> numbers) {
-        return getDistinctSize(numbers) != numbers.size();
+        return distinctSize(numbers) != numbers.size();
     }
 
-    private static long getDistinctSize(List<Integer> numbers) {
+    private static long distinctSize(List<Integer> numbers) {
         return numbers.stream()
             .distinct()
             .count();
     }
 
-    private static Set<Integer> toSet(List<Integer> numbers) {
-        return numbers.stream().collect(toUnmodifiableSet());
-    }
 }

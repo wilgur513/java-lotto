@@ -55,8 +55,8 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(() -> autoLotto, new Money(3000),
             new Lottoes(List.of(manualLotto1, manualLotto2)));
 
-        assertThat(lottoMachine.getManualLottoesSize()).isEqualTo(2);
-        assertThat(lottoMachine.getAutoLottoesSize()).isEqualTo(1);
+        assertThat(lottoMachine.manualLottoesSize()).isEqualTo(2);
+        assertThat(lottoMachine.autoLottoesSize()).isEqualTo(1);
     }
 
     @Test

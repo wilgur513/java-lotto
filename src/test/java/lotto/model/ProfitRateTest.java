@@ -13,7 +13,7 @@ public class ProfitRateTest {
     @DisplayName("수익률을 double형 실수로 반환")
     void getDoubleValue() {
         ProfitRate rate = new ProfitRate(new BigDecimal(10.24));
-        assertThat(rate.getDoubleValue()).isCloseTo(10.24, Offset.offset(0.001));
+        assertThat(rate.doubleValue()).isCloseTo(10.24, Offset.offset(0.001));
     }
 
     @Test

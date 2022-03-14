@@ -12,7 +12,7 @@ public class ProfitRate {
         this.rate = rate;
     }
 
-    public double getDoubleValue() {
+    public double doubleValue() {
         return rate.doubleValue();
     }
 
@@ -43,5 +43,12 @@ public class ProfitRate {
     @Override
     public int hashCode() {
         return Objects.hash(rate);
+    }
+
+    @Override
+    public String toString() {
+        return "ProfitRate{" +
+            "rate=" + rate +
+            '}';
     }
 }

@@ -20,7 +20,7 @@ public enum Rank {
         this.predicate = predicate;
     }
 
-    public Money getPrize() {
+    public Money prize() {
         return prize;
     }
 

@@ -21,7 +21,7 @@ public class LottoNumber {
         return LOTTO_NUMBER_LOWER_BOUND > number || number > LOTTO_NUMBER_UPPER_BOUND;
     }
 
-    public int getIntValue() {
+    public int intValue() {
         return number;
     }
 

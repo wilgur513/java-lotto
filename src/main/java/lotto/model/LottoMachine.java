@@ -18,7 +18,7 @@ public class LottoMachine {
     }
 
     private Money remainMoney(Money money, Lottoes lottoes) {
-        return money.subtract(lottoes.getPrice());
+        return money.subtract(lottoes.price());
     }
 
     public Lottoes issueLotto() {
@@ -39,11 +39,11 @@ public class LottoMachine {
         return money.divide(Lotto.PRICE).intValue();
     }
 
-    public int getManualLottoesSize() {
+    public int manualLottoesSize() {
         return manualLottoes.size();
     }
 
-    public int getAutoLottoesSize() {
+    public int autoLottoesSize() {
         return money.divide(Lotto.PRICE).intValue();
     }
 }

@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 public class StatisticTest {
 
-    private static final Money FIRST_PRIZE = Rank.FIRST.getPrize();
-    private static final Money SECOND_PRIZE = Rank.SECOND.getPrize();
-    private static final Money THIRD_PRIZE = Rank.THIRD.getPrize();
+    private static final Money FIRST_PRIZE = Rank.FIRST.prize();
+    private static final Money SECOND_PRIZE = Rank.SECOND.prize();
+    private static final Money THIRD_PRIZE = Rank.THIRD.prize();
 
     @Test
     @DisplayName("당첨결과 통계 테스트")
@@ -21,13 +21,13 @@ public class StatisticTest {
 
         Money expected = FIRST_PRIZE.multiply(2).plus(SECOND_PRIZE).plus(THIRD_PRIZE);
         BigDecimal actualProfitRate = expected.divide(new Money(4000));
-        assertThat(statistic.getProfitRate()).isEqualTo(new ProfitRate(actualProfitRate));
-        assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(2);
-        assertThat(statistic.getCountByRank(Rank.SECOND)).isEqualTo(1);
-        assertThat(statistic.getCountByRank(Rank.THIRD)).isEqualTo(1);
-        assertThat(statistic.getCountByRank(Rank.FOURTH)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.FIFTH)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.NOTHING)).isEqualTo(0);
+        assertThat(statistic.profitRate()).isEqualTo(new ProfitRate(actualProfitRate));
+        assertThat(statistic.countBy(Rank.FIRST)).isEqualTo(2);
+        assertThat(statistic.countBy(Rank.SECOND)).isEqualTo(1);
+        assertThat(statistic.countBy(Rank.THIRD)).isEqualTo(1);
+        assertThat(statistic.countBy(Rank.FOURTH)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.FIFTH)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.NOTHING)).isEqualTo(0);
     }
 
     @Test
@@ -35,12 +35,12 @@ public class StatisticTest {
     void summarizeEmptyLottoList() {
         Statistic statistic = new Statistic(Collections.emptyList());
 
-        assertThat(statistic.getProfitRate()).isEqualTo(new ProfitRate(BigDecimal.ONE));
-        assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.SECOND)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.THIRD)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.FOURTH)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.FIFTH)).isEqualTo(0);
-        assertThat(statistic.getCountByRank(Rank.NOTHING)).isEqualTo(0);
+        assertThat(statistic.profitRate()).isEqualTo(new ProfitRate(BigDecimal.ONE));
+        assertThat(statistic.countBy(Rank.FIRST)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.SECOND)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.THIRD)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.FOURTH)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.FIFTH)).isEqualTo(0);
+        assertThat(statistic.countBy(Rank.NOTHING)).isEqualTo(0);
     }
 }
